@@ -1,0 +1,16 @@
+;@ schema_version: 0.0.3
+;@ sequence_version:
+;@ title: ZGPR30
+;@ description: 1D pulse-acquire sequence using a 30° excitation pulse
+;@ authors:
+;@   - Bruker
+;@ created: 2026-06-03
+;@ last_modified: 2026-06-03
+;@ status: stable
+;@ features: decoupling
+;@ experiment_type: ["1d"]
+;@ typical nuclei: [1H, 13C]
+;@ dimensions: [f1]
+;@ acquisition_order: [f1]
+;@ reference_pulse: 
+;@   - name: f1, duration; p1, power: p11
