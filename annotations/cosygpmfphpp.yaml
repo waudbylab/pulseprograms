@@ -1,0 +1,17 @@
+schema_version: 0.0.3
+sequence_version: 1.0.0
+title: COSY-GPMF-PHPP
+description: 2D homonuclear shift-correlation experiment
+  - phase-sensitive COSY
+  - gradient selection
+authors:
+  - Bruker
+created: 2026-06-04
+last_modified: 2026-06-04
+status: stable
+features: [cosy, phase-sensitive, gradient-selection, pulsed-field gradients]
+experiment_type: ["2d"]
+typical_nuclei: [1H]
+dimensions: [f1, f2]
+acquisition_order: [f2, f1]
+reference_pulse: {channel: f1, duration: p1, power: pl1}
