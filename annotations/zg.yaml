@@ -2,6 +2,24 @@ title: zg
 description: "1D sequence"
 authors:
   - "Bruker"
-last_modified: "2026-06-01"
-features: []
+last_modified: "2026-06-04"
 experiment_type: ["1d"]
+repository: "github.com/waudbylab/pulseprograms"
+status: stabale
+features: 
+- relaxation_delay
+- excitation_pulse
+- acquisition
+typical_nuclei:
+- "1H"
+- "19F"
+- "31P"
+dimensions:
+- f1
+acquisition_order: 
+- f1
+reference_pulse:
+power: pl1
+channel: f1
+duration: p1
+angle: 90
