@@ -1,0 +1,20 @@
+schema_version: 0.0.3
+sequence_version: 0.1.0
+title: HQQCGPPR
+description: Simultaneous HQQC and HDQQC measurement
+  - with presaturation
+  - with 13C decoupling during acquisition
+authors:
+  - Bruker
+created: 2026-06-05
+last_modified: 2026-06-07
+repository: github.com/waudbylab/pulseprograms
+status: experimental
+experiment_type: [hmqc, 2d]
+features: [presaturation, phase_sensitive, broadband]
+typical_nuclei: [1H, 13C]
+dimensions: [f2, f1]
+acquisition_order: [f1, f2]
+reference_pulse:
+  - {channel: f1, duration: p1, power: pl1}
+  - {channel: f2, duration: p3, power: pl2}
