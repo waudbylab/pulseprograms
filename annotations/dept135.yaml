@@ -1,8 +1,8 @@
 schema_version: "0.0.3"
 sequence_version: "5.0.0"
 title: dept135
-description: 
-  - 1D DEPT experiment with 135 degree pulse
+description: |
+  1D DEPT experiment with 135 degree pulse
   - with decoupling during acquisition
 authors:
   - Bruker
