@@ -10,7 +10,7 @@ created: 2026-06-10
 last_modified: 2026-06-10
 repository: "github.com/waudbylab/pulseprograms"
 status: stable
-experiment_type: [dept, 1d]
+experiment_type: [1d]
 features: [decoupling, broadband]
 typical_nuclei: [1H]
 dimensions: [f1]
