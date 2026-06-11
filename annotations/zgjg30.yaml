@@ -1,6 +1,6 @@
 schema_version: "0.0.3"
 sequence_version: "5.0.0"
-title: 1D inverse-gated decoupling
+title: zgjg30
 description: |
   1D sequence with inverse-gated decoupling
   - using 30 degree flip angle
