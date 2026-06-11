@@ -5,20 +5,22 @@ authors:
 last_modified: "2026-06-04"
 experiment_type: ["1d"]
 repository: "github.com/waudbylab/pulseprograms"
-status: stabale
+status: stable
 features: 
 - relaxation_delay
 - excitation_pulse
 - acquisition
 typical_nuclei:
-- "1H"
-- "19F"
-- "31P"
+- [1H,19F,31P]
 dimensions:
 - f1
 acquisition_order: 
 - f1
-reference_pulse:
+reference_pulse: #object = collection of KV pairs
+  power: pl1
+  channel: f1
+  duration: p1
+  angle: 90
 power: pl1
 channel: f1
 duration: p1
