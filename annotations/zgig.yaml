@@ -1,0 +1,18 @@
+schema_version: "0.0.3"
+sequence_version: "1.0.0"
+title: zgig
+description: 1D sequence with inverse-gated decoupling
+authors:
+  - Bruker
+created: 2011-01-12
+last_modified: 2026-06-11
+repository: github.com/waudbylab/pulseprograms
+status: stable
+experiment_type: [1d]
+features: [inverse_gated_decoupling]
+typical_nuclei: [13C, 1H]
+dimensions: [f1]
+acquisition_order: [f1]
+reference_pulse:
+  - {channel: f1, duration: p1, power: pl1}
+  - {channel: f2, duration: pcpd2, power: pl12}
