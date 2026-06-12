@@ -1,0 +1,18 @@
+title: t1ir
+description: T1 measurement using inversion recovery
+schema_version: "0.0.3"
+sequence_version: "5.0.0"
+authors:
+  - Bruker
+created: 2020-01-09
+last_modified: 2026-06-11
+repository: github.com/waudbylab/pulseprograms
+status: stable
+experiment_type: [relaxation, 1d]
+features: [R1, inversion_recovery]
+typical_nuclei: [[1H,19F,31P]]
+dimensions: [relaxation.duration, f1]
+acquisition_order: [f1, relaxation.duration]
+reference_pulse:
+  - {channel: f1, duration: p1, power: pl1}
+relaxation: {type: R1, model: inversion_recovery, channel: f1, duration: VDLIST}
