@@ -2,14 +2,14 @@ title: zg
 description: "1D sequence"
 authors:
   - "Bruker"
-last_modified: "2026-06-04"
+sequence_version: "1.0.0"
+created: "2000-01-01"
+last_modified: "2026-06-12"
 experiment_type: ["1d"]
 repository: "github.com/waudbylab/pulseprograms"
+schema_version: 0.0.3
 status: stable
-features: 
-- relaxation_delay
-- excitation_pulse
-- acquisition
+features: []
 typical_nuclei:
 - [1H,19F,31P]
 dimensions:
@@ -17,11 +17,4 @@ dimensions:
 acquisition_order: 
 - f1
 reference_pulse: #object = collection of KV pairs
-  power: pl1
-  channel: f1
-  duration: p1
-  angle: 90
-power: pl1
-channel: f1
-duration: p1
-angle: 90
+- {channel: f1, power: pl1, duration: p1, angle: 90}
