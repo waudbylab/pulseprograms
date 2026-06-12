@@ -1,0 +1,18 @@
+schema_version: "0.0.3"
+sequence_version: "1.0.0"
+title: dept135
+description: 1D DEPT experiment with 135 degree pulse with decoupling during acquisition
+authors:
+  - Bruker
+created: 2026-06-10
+last_modified: 2026-06-10
+1repository: "github.com/waudbylab/pulseprograms"
+status: stable
+experiment_type: [1d]
+features: [decoupling, broadband]
+typical_nuclei: [1H]
+dimensions: [f1]
+acquisition_order: [f1]
+reference_pulse:
+  - {channel: f1, duration: p1, power: pl1}
+  - {channel: f2, duration: p3, power: pl2}
