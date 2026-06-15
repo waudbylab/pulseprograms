@@ -1,0 +1,29 @@
+title: zg2d
+description: Basic 2D acquisition pulse program
+schema_version: "0.0.3"
+sequence_version: "5.0.0"
+authors:
+  - Bruker
+created: 2020-01-09
+last_modified: 2026-06-15
+repository: github.com/vaudbylab/pulseprograms
+status: stable
+experiment_type: [generic, 2d]
+features:
+  - basic_acquisition
+  - t1_evolution
+typical_nuclei: [1H,19F,31P,13C,15N]
+dimensions:
+  - f1
+  - f2
+acquisition_order:
+  - f2
+  - f1
+reference_pulse:
+-{channel: f1, duration: p1, power: pl1}
+indirect_dimension:
+  channel: f1
+  evolution_time: d0
+acquisition:
+  channel: f1
+  detection: direct
