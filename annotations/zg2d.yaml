@@ -8,10 +8,11 @@ created: 2011-01-12
 last_modified: 2026-06-11
 repository: github.com/waudbylab/pulseprograms
 status: stable
-experiment_type: [1d]
-features: [pseudo_2d]
+experiment_type: [1d, kinetics]
+features: []
 typical_nuclei: [[1H, 19F, 31P]]
-dimensions: [experiment.index, f1]
-acquisition_order: [f1, experiment.index]
+dimensions: [kinetics.duration, f1]
+acquisition_order: [f1, kinetics.duration]
+kinetics: {duration: {type: linear, start: d20, step: d20}}
 reference_pulse:
   - {channel: f1, duration: p1, power: pl1}
