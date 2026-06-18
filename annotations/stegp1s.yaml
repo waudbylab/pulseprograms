@@ -17,8 +17,8 @@ reference_pulse:
   - {channel: f1, duration: p1, power: pl1}
 diffusion:
   type: monopolar
-  coherence: [f1, 1]
+  coherence: f1
   big_delta: d20
   little_delta: p30
-  gradient_strength: {type: list, values: diff, scale: gpz6}
+  gradient_strength: {list: diff, scale: gp6}
   gradient_shape: gpnam6
