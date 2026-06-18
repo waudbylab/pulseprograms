@@ -9,7 +9,7 @@ last_modified: 2026-06-11
 repository: github.com/waudbylab/pulseprograms
 status: stable
 experiment_type: [diffusion, 1d]
-features: [ste]
+features: [homonuclear, ste]
 typical_nuclei: [[1H, 19F, 31P]]
 dimensions: [diffusion.gradient_strength, f1]
 acquisition_order: [f1, diffusion.gradient_strength]

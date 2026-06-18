@@ -9,7 +9,7 @@ experiment_type: ["1d"]
 repository: "github.com/waudbylab/pulseprograms"
 schema_version: 0.0.3
 status: stable
-features: []
+features: [homonuclear]
 typical_nuclei:
 - [1H,19F,31P]
 dimensions:

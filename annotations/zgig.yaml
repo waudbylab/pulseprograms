@@ -9,7 +9,7 @@ last_modified: 2026-06-11
 repository: github.com/waudbylab/pulseprograms
 status: stable
 experiment_type: [1d]
-features: [inverse_gated_decoupling]
+features: [heteronuclear, decoupling, inverse_gated]
 typical_nuclei: [13C, 1H]
 dimensions: [f1]
 acquisition_order: [f1]

@@ -1,13 +1,13 @@
 schema_version: 0.0.3
 sequence_version: 1.5.1
 title: ZGPR30
-description: 1D pulse-acquire sequence using a 30° excitation pulse
+description: 1D pulse-acquire sequence using a 30° excitation pulse and presaturation
 authors:
    - Bruker
 created: 2026-06-03
 last_modified: 2026-06-04
 status: stable
-features: [presaturation, 30-degree-excitation]
+features: [homonuclear, presaturation, 30_degree_excitation]
 experiment_type: [1d]
 typical nuclei: [[1H, 13C]]
 dimensions: [f1]

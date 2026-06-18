@@ -9,7 +9,7 @@ last_modified: 2026-06-11
 repository: github.com/waudbylab/pulseprograms
 status: stable
 experiment_type: [relaxation, 1d]
-features: [R1, inversion_recovery]
+features: [homonuclear, R1, inversion_recovery]
 typical_nuclei: [[1H,19F,31P]]
 dimensions: [relaxation.duration, f1]
 acquisition_order: [f1, relaxation.duration]

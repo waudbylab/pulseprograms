@@ -9,7 +9,7 @@ last_modified: 2026-06-11
 repository: github.com/waudbylab/pulseprograms
 status: stable
 experiment_type: [1d, kinetics]
-features: []
+features: [homonuclear]
 typical_nuclei: [[1H, 19F, 31P]]
 dimensions: [kinetics.duration, f1]
 acquisition_order: [f1, kinetics.duration]
