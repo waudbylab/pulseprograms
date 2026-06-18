@@ -1,0 +1,24 @@
+title: stegp1s
+description: Diffusion measurement using stimulated echo with one spoil gradient
+schema_version: "0.0.3"
+sequence_version: "5.0.0"
+authors:
+  - Bruker
+created: 2011-02-19
+last_modified: 2026-06-11
+repository: github.com/waudbylab/pulseprograms
+status: stable
+experiment_type: [diffusion, 1d]
+features: [ste]
+typical_nuclei: [[1H, 19F, 31P]]
+dimensions: [diffusion.gradient_strength, f1]
+acquisition_order: [f1, diffusion.gradient_strength]
+reference_pulse:
+  - {channel: f1, duration: p1, power: pl1}
+diffusion:
+  type: monopolar
+  coherence: f1
+  big_delta: d20
+  little_delta: p30
+  gradient_strength: {list: diff, scale: gp6}
+  gradient_shape: gpnam6
