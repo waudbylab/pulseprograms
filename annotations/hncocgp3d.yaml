@@ -1,0 +1,19 @@
+title: hncocgp3d
+description: 3D sequence with inverse correlation for triple resonance using INEPT transfer steps and correlation via heteronuclear zero- and double-quantum coherence
+schema_version: "0.0.3"
+sequence_version: "5.0.0"
+authors:
+  - Bruker
+created: 2015-09-21
+last_modified: 2026-06-11
+repository: github.com/waudbylab/pulseprograms
+status: stable
+experiment_type: [hncoc, 3d]
+features: [triple_resonance, constant_time]
+typical_nuclei: [1H, 13C, 15N]
+dimensions: [f1, f2, f3]
+acquisition_order: [f3, f2, f1]
+reference_pulse:
+  - {channel: f1, duration: p1, power: pl1}
+  - {channel: f2, duration: p13, power: sp2}
+  - {channel: f3, duration: p21, power: pl3}
