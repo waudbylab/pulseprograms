@@ -1,0 +1,19 @@
+title: selno
+description: 1D selective NOESY experiment using a shaped pulse
+schema_version: "0.0.3"
+sequence_version: "5.0.0"
+authors:
+  - Bruker
+created: 2015-09-21
+last_modified: 2026-06-11
+repository: github.com/waudbylab/pulseprograms
+status: stable
+experiment_type: [noesy, 1d]
+features: [selective]
+typical_nuclei: [1H]
+dimensions: [f1]
+acquisition_order: [f1]
+reference_pulse:
+  - {channel: f1, duration: p1, power: pl1}
+noesy:
+  duration: d8
