@@ -93,64 +93,70 @@ class PRValidator:
             return yaml.safe_load(f)
     
     def get_changed_files(self) -> List[str]:
-        """Get list of changed sequence files in this PR."""
+        """Get list of changed sequence and annotation files in this PR."""
         try:
             # Get files changed in PR (compared to base branch)
-            result = subprocess.run(['git', 'diff', '--name-only', 'origin/main...HEAD'], 
+            result = subprocess.run(['git', 'diff', '--name-only', 'origin/main...HEAD'],
                                   capture_output=True, text=True)
             if result.returncode == 0:
                 changed_files = []
                 for file in result.stdout.strip().split('\n'):
                     if file.startswith('sequences/') and not file.endswith('README.md'):
                         changed_files.append(file)
+                    elif file.startswith('annotations/') and file.endswith('.yaml'):
+                        changed_files.append(file)
                 return changed_files
         except:
             pass
-        
-        # Fallback: check all sequence files
+
+        # Fallback: check all sequence and annotation files
+        changed_files = []
         sequences_dir = Path("sequences")
         if sequences_dir.exists():
-            return [str(f) for f in sequences_dir.iterdir() 
-                   if f.is_file() and f.name != 'README.md']
-        return []
+            changed_files += [str(f) for f in sequences_dir.iterdir()
+                              if f.is_file() and f.name != 'README.md']
+        annotations_dir = Path("annotations")
+        if annotations_dir.exists():
+            changed_files += [str(f) for f in annotations_dir.glob("*.yaml")]
+        return changed_files
     
     def extract_metadata(self, file_path: str) -> Optional[Dict[str, Any]]:
-        """Extract YAML metadata from a sequence file."""
+        """Extract YAML metadata from a sequence or annotation file."""
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
-            
-            # Extract all lines starting with ';@' and strip the prefix
-            yaml_lines = []
-            for line in content.split('\n'):
-                if line.strip().startswith(';@'):
-                    # Remove ';@' prefix but preserve indentation after it
-                    if len(line.strip()) == 2:  # Just ';@' with no content
-                        yaml_lines.append('')  # Empty line
-                    else:
-                        yaml_line = line.strip()[2:]  # Remove ';@'
-                        if yaml_line.startswith(' '):
-                            yaml_line = yaml_line[1:]  # Remove one space after ';@'
-                        yaml_lines.append(yaml_line)
-            
-            if not yaml_lines:
-                return None
-            
-            # Join all YAML lines and parse as a single block
-            yaml_content = '\n'.join(yaml_lines)
-            metadata = yaml.safe_load(yaml_content)
-            
+
+            # Annotation files are plain YAML; sequence files use ';@' prefix
+            if file_path.startswith('annotations/'):
+                metadata = yaml.safe_load(content)
+            else:
+                yaml_lines = []
+                for line in content.split('\n'):
+                    if line.strip().startswith(';@'):
+                        if len(line.strip()) == 2:
+                            yaml_lines.append('')
+                        else:
+                            yaml_line = line.strip()[2:]
+                            if yaml_line.startswith(' '):
+                                yaml_line = yaml_line[1:]
+                            yaml_lines.append(yaml_line)
+
+                if not yaml_lines:
+                    return None
+
+                metadata = yaml.safe_load('\n'.join(yaml_lines))
+
             if not isinstance(metadata, dict):
                 return None
-            
+
             # Convert date objects to strings for validation
             for key, value in metadata.items():
                 if isinstance(value, date):
                     metadata[key] = value.isoformat()
-            
+
             return metadata
-            
-        except Exception as e:
+
+        except Exception:
             return None
     
     def generate_auto_suggestions(self, file_path: str, metadata: Optional[Dict[str, Any]]) -> Dict[str, Any]:
@@ -257,10 +263,11 @@ class PRValidator:
         return defaults.get(field, '""')
     
     def validate_sequence(self, file_path: str) -> Dict[str, Any]:
-        """Validate a single sequence file."""
+        """Validate a single sequence or annotation file."""
         file_name = Path(file_path).name
         result = {
             'file': file_path,
+            'is_annotation': file_path.startswith('annotations/'),
             'valid': False,
             'errors': [],
             'warnings': [],
@@ -335,41 +342,38 @@ class PRValidator:
     def get_previous_version(self, file_path: str) -> Optional[str]:
         """Get the sequence_version from the previous version of the file in git."""
         try:
-            # Get the file content from the base branch (main)
-            result = subprocess.run(['git', 'show', f'origin/main:{file_path}'], 
+            result = subprocess.run(['git', 'show', f'origin/main:{file_path}'],
                                   capture_output=True, text=True)
             if result.returncode != 0:
-                # File doesn't exist in main branch (new file)
                 return None
-            
-            # Extract metadata from previous version
+
             content = result.stdout
-            yaml_lines = []
-            
-            for line in content.split('\n'):
-                if line.strip().startswith(';@'):
-                    # Remove ';@' prefix but preserve indentation after it
-                    if len(line.strip()) == 2:  # Just ';@' with no content
-                        yaml_lines.append('')  # Empty line
-                    else:
-                        yaml_line = line.strip()[2:]  # Remove ';@'
-                        if yaml_line.startswith(' '):
-                            yaml_line = yaml_line[1:]  # Remove one space after ';@'
-                        yaml_lines.append(yaml_line)
-            
-            if not yaml_lines:
-                return None
-            
-            # Join all YAML lines and parse as a single block
-            yaml_content = '\n'.join(yaml_lines)
-            metadata = yaml.safe_load(yaml_content)
-            
+
+            if file_path.startswith('annotations/'):
+                metadata = yaml.safe_load(content)
+            else:
+                yaml_lines = []
+                for line in content.split('\n'):
+                    if line.strip().startswith(';@'):
+                        if len(line.strip()) == 2:
+                            yaml_lines.append('')
+                        else:
+                            yaml_line = line.strip()[2:]
+                            if yaml_line.startswith(' '):
+                                yaml_line = yaml_line[1:]
+                            yaml_lines.append(yaml_line)
+
+                if not yaml_lines:
+                    return None
+
+                metadata = yaml.safe_load('\n'.join(yaml_lines))
+
             if isinstance(metadata, dict) and 'sequence_version' in metadata:
                 return metadata['sequence_version']
-            
+
         except Exception:
             pass
-        
+
         return None
     
     def is_file_modified(self, file_path: str) -> bool:
@@ -473,24 +477,27 @@ No sequence files were changed in this PR.
                     comment += f"- {error}\n"
                 comment += "\n"
             
+            # Annotation files use plain YAML; sequence files use ;@ prefix
+            field_prefix = "" if result.get('is_annotation') else ";@ "
+
             # Handle complete template for files with no metadata
             if 'complete_template' in suggestions:
                 comment += "**📝 Add This Metadata (Copy & Paste):**\n\n"
                 comment += "```yaml\n"
                 for field, value in suggestions['complete_template'].items():
-                    comment += f";@ {field}: {value}\n"
+                    comment += f"{field_prefix}{field}: {value}\n"
                 comment += "```\n\n"
-            
+
             # Handle missing required fields
             elif suggestions.get('missing_required'):
                 missing_fields = suggestions['missing_required']
                 suggested_metadata = suggestions.get('suggested_metadata', {})
-                
-                comment += f"**📝 Add Missing Required Fields:**\n\n"
+
+                comment += "**📝 Add Missing Required Fields:**\n\n"
                 comment += "```yaml\n"
                 for field in missing_fields:
                     value = suggested_metadata.get(field, '""')
-                    comment += f";@ {field}: {value}\n"
+                    comment += f"{field_prefix}{field}: {value}\n"
                 comment += "```\n\n"
             
             # Handle key optional fields (experiment_type and description only)

@@ -126,6 +126,71 @@ def validate_against_schema():
         print('\nAll sequences validated successfully!')
         return True
 
+def validate_annotation_files():
+    """Validate standalone YAML files in the annotations/ directory against the schema."""
+    print("Validating annotation files...")
+
+    annotations_dir = Path("annotations")
+    if not annotations_dir.exists():
+        print("No annotations directory found")
+        return True
+
+    # Load schema (reuse same lookup as validate_against_schema)
+    schema_content = None
+    for schema_path in ['schemas/current', 'schemas/v0.0.3.yaml']:
+        try:
+            with open(schema_path, 'r') as f:
+                schema_content = yaml.safe_load(f)
+            break
+        except FileNotFoundError:
+            continue
+    if schema_content is None:
+        print("Error: No schema file found")
+        return False
+
+    error_count = 0
+    yaml_files = sorted(annotations_dir.glob("*.yaml"))
+    if not yaml_files:
+        print("No annotation files found")
+        return True
+
+    for file_path in yaml_files:
+        try:
+            with open(file_path, 'r') as f:
+                metadata = yaml.safe_load(f)
+
+            if not isinstance(metadata, dict):
+                print(f"✗ {file_path} - Not a valid YAML mapping")
+                error_count += 1
+                continue
+
+            # Convert date objects to strings for JSON schema validation
+            for key, value in metadata.items():
+                if isinstance(value, date):
+                    metadata[key] = value.isoformat()
+
+            try:
+                validate(instance=metadata, schema=schema_content)
+                print(f"✓ {file_path} - Valid")
+            except ValidationError as e:
+                print(f"✗ {file_path} - Invalid: {e.message}")
+                error_count += 1
+
+        except yaml.YAMLError as e:
+            print(f"✗ {file_path} - YAML syntax error: {e}")
+            error_count += 1
+        except Exception as e:
+            print(f"✗ {file_path} - Error: {e}")
+            error_count += 1
+
+    if error_count > 0:
+        print(f"\nAnnotation validation failed: {error_count} files have errors")
+        return False
+
+    print("All annotation files validated successfully!")
+    return True
+
+
 def check_naming_conventions():
     """Check file naming conventions."""
     print("Checking file naming conventions...")
@@ -160,11 +225,15 @@ def main():
     # Run YAML syntax validation
     if not validate_yaml_syntax():
         success = False
-    
-    # Run schema validation  
+
+    # Run schema validation
     if not validate_against_schema():
         success = False
-    
+
+    # Validate standalone annotation files
+    if not validate_annotation_files():
+        success = False
+
     # Run naming convention checks
     if not check_naming_conventions():
         success = False

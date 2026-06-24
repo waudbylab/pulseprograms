@@ -4,11 +4,13 @@ on:
   pull_request:
     paths:
       - 'sequences/**'
+      - 'annotations/**'
       - 'schemas/**'
   push:
     branches: [ main ]
     paths:
       - 'sequences/**'
+      - 'annotations/**'
       - 'schemas/**'
   workflow_dispatch:
 
