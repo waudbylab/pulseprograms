@@ -1,0 +1,17 @@
+title: mlevphpr
+description: 2D homonuclear TOCSY experiment using MLEV17 mixing
+schema_version: "0.0.3"
+sequence_version: "5.0.0"
+authors:
+  - Bruker
+created: 2011-01-12
+last_modified: 2026-06-11
+repository: github.com/waudbylab/pulseprograms
+status: stable
+experiment_type: [tocsy, 2d]
+features: [mlev, presaturation]
+typical_nuclei: [1H]
+dimensions: [f2, f1]
+acquisition_order: [f1, f2]
+reference_pulse:
+  - {channel: f1, duration: p1, power: pl1}
