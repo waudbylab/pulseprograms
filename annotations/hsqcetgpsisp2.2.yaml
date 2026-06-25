@@ -1,10 +1,10 @@
 schema_version: "0.0.3"
 sequence_version: "0.1.0"
-title: Sensitivity Enhanced 1H-15N HSQC with Water Flip-Back and PEP
+title: Sensitivity Enhanced 1H-13C HSQC with Adiabatic Pulses
 authors:
   - Bruker
-created: "2026-06-20"
-last_modified: "2026-06-24"
+created: "2026-06-25"
+last_modified: "2026-06-25"
 repository: "github.com/waudbylab/pulseprograms"
 status: stable
 experiment_type:
@@ -13,39 +13,40 @@ dimensions:
   - f1
   - f2
 typical_nuclei:
-  - [1H,15N]
+  - [1H, 13C]
 acquisition_order:
   - f1
   - f2
-description: 
-  Gradient-selected phase-sensitive 1H-15N HSQC experiment
+description: >
+  Gradient-selected phase-sensitive 1H-13C HSQC experiment
   employing INEPT-based coherence transfer, echo-antiecho
-  detection, water flip-back pulse, and PEP sensitivity
-  enhancement. Magnetization is transferred from 1H to 15N,
-  evolved during t1, transferred back to 1H, and detected
-  with heteronuclear decoupling.
+  detection, PEP sensitivity enhancement, and broadband
+  adiabatic inversion and refocusing pulses. Magnetization
+  is transferred from 1H to 13C, evolved during t1,
+  transferred back to 1H, and detected with heteronuclear
+  decoupling.
 features:
   - inept_transfer
   - reverse_inept_transfer
   - one_bond_heteronuclear_correlation
-  - n15_chemical_shift_evolution
+  - c13_chemical_shift_evolution
   - echo_antiecho
   - gradient_coherence_selection
-  - water_flip_back
   - sensitivity_enhanced
   - pulsed_field_gradients
   - phase_sensitive
-  - c13_decoupling
-  - n15_decoupled_acquisition
+  - adiabatic_inversion_pulse
+  - adiabatic_refocusing_pulse
+  - pep_transfer
+  - c13_decoupled_acquisition
 reference_pulse:
   - {channel: f1, duration: p1, power: pl1}
-  - {channel: f2, duration: p21, power: pl21}
-  - {channel: f3, duration: p8, power: pl8}
+  - {channel: f2, duration: p3, power: pl2}
 transfer_pathway:
-  - 1H -> 15N -> 1H
+  - 1H -> 13C -> 1H
 correlation_type:
   - Direct one-bond heteronuclear correlation
 detected_nucleus:
   - 1H
 evolved_nucleus:
-  - 15N
+  - 13C
