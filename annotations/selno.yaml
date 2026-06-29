@@ -8,12 +8,12 @@ created: 2015-09-21
 last_modified: 2026-06-11
 repository: github.com/waudbylab/pulseprograms
 status: stable
-experiment_type: [noesy, 1d]
-features: [selective]
+experiment_type: [noesy, 1d, selective]
+features: [random_mixing_time, zero_quantum_suppression]
 typical_nuclei: [1H]
 dimensions: [f1]
 acquisition_order: [f1]
 reference_pulse:
   - {channel: f1, duration: p1, power: pl1}
-noesy:
-  duration: d8
+noesy: {duration: d8, random: cnst8}
+selective: {channel: f1, duration: p11, shape: sp1, offset: spoffs1}
