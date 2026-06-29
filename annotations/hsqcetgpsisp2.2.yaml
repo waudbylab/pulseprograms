@@ -4,14 +4,15 @@ title: Sensitivity Enhanced 1H-13C HSQC with Adiabatic Pulses
 authors:
   - Bruker
 created: "2026-06-25"
-last_modified: "2026-06-25"
+last_modified: "2026-06-29"
 repository: "github.com/waudbylab/pulseprograms"
 status: stable
 experiment_type:
   - hsqc
+  - 2d
 dimensions:
-  - f1
   - f2
+  - f1
 typical_nuclei:
   - [1H, 13C]
 acquisition_order:
@@ -26,27 +27,17 @@ description: >
   transferred back to 1H, and detected with heteronuclear
   decoupling.
 features:
-  - inept_transfer
-  - reverse_inept_transfer
-  - one_bond_heteronuclear_correlation
-  - c13_chemical_shift_evolution
   - echo_antiecho
-  - gradient_coherence_selection
+  - gradient_selection
   - sensitivity_enhanced
   - pulsed_field_gradients
   - phase_sensitive
+  - echo_antiecho
+  - broadband
   - adiabatic_inversion_pulse
   - adiabatic_refocusing_pulse
-  - pep_transfer
-  - c13_decoupled_acquisition
 reference_pulse:
   - {channel: f1, duration: p1, power: pl1}
   - {channel: f2, duration: p3, power: pl2}
 transfer_pathway:
-  - 1H -> 13C -> 1H
-correlation_type:
-  - Direct one-bond heteronuclear correlation
-detected_nucleus:
-  - 1H
-evolved_nucleus:
-  - 13C
+  - H[C]
