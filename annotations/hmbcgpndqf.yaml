@@ -1,0 +1,18 @@
+title: hmbcgpndqf
+description: 2D HMBC experiment optimized for long-range heteronuclear couplings using gradient selection
+schema_version: "0.0.3"
+sequence_version: "5.0.0"
+authors:
+  - Bruker
+created: 2011-01-12
+last_modified: 2026-06-11
+repository: github.com/waudbylab/pulseprograms
+status: stable
+experiment_type: [hmbc, 2d]
+features: [gradient_selected, long_range_coupling]
+typical_nuclei: [[1H,13C], [1H,15N]]
+dimensions: [f1, f2]
+acquisition_order: [f2, f1]
+reference_pulse:
+  - {channel: f1, duration: p1, power: pl1}
+  - {channel: f2, duration: p3, power: pl2}
