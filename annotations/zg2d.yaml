@@ -1,0 +1,18 @@
+title: zg2d
+description: Pseudo 2D sequence
+schema_version: "0.0.3"
+sequence_version: "5.0.0"
+authors:
+  - Bruker
+created: 2011-01-12
+last_modified: 2026-06-11
+repository: github.com/waudbylab/pulseprograms
+status: stable
+experiment_type: [1d, kinetics]
+features: [homonuclear]
+typical_nuclei: [[1H, 19F, 31P]]
+dimensions: [kinetics.duration, f1]
+acquisition_order: [f1, kinetics.duration]
+kinetics: {duration: {type: linear, start: d20, step: d20}}
+reference_pulse:
+  - {channel: f1, duration: p1, power: pl1}
