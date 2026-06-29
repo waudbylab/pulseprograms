@@ -1,0 +1,22 @@
+title: cpmg
+description: T2 measurement using the Carr-Purcell-Meiboom-Gill (CPMG) pulse sequence
+schema_version: "0.0.3"
+sequence_version: "5.0.0"
+authors:
+  - Bruker
+created: 2013-01-20
+last_modified: 2026-06-29
+repository: github.com/waudbylab/pulseprograms
+status: stable
+experiment_type: [relaxation, 1d]
+features: [R2, cpmg, homonuclear]
+typical_nuclei: [[1H, 19F, 31P]]
+dimensions: [relaxation.duration, f1]
+acquisition_order: [f1, relaxation.duration]
+reference_pulse:
+  - {channel: f1, duration: p1, power: pl1}
+relaxation:
+  type: R2
+  model: exponential-decay
+  channel: f1
+  duration: {counter: cpmglist, scale: {expression: "2*d20+p2"}}}
