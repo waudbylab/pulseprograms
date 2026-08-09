@@ -1,0 +1,17 @@
+title: jmod
+description: J-modulated spin-echo experiment for determining the number of attached protons
+schema_version: "0.0.3"
+sequence_version: "5.0.0"
+authors:
+  - Bruker
+created: 2017-06-20
+last_modified: 2026-06-11
+repository: github.com/waudbylab/pulseprograms
+status: stable
+experiment_type: [jmod, 1d]
+features: [spin_echo, broadband]
+typical_nuclei: [13C]
+dimensions: [f1]
+acquisition_order: [f1]
+reference_pulse:
+  - {channel: f1, duration: p1, power: pl1}
