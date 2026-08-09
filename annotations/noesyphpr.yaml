@@ -1,0 +1,19 @@
+schema_version: "0.0.3"
+sequence_version: "1.0.0"
+title: noesyphpr
+description: |
+  - 2D homonuclear NOESY measurement
+  - with presaturation during relaxation delay and mixing time
+authors:
+  - Bruker
+created: 2016-06-09
+last_modified: 2026-06-10
+repository: github.com/waudbylab/pulseprograms
+status: stable
+experiment_type: [noesy, 2d]
+features: [presaturation, mixing]
+typical_nuclei: [1H]
+dimensions: [f2, f1]
+acquisition_order: [f1, f2]
+reference_pulse:
+  - {channel: f1, duration: p1, power: pl1}
