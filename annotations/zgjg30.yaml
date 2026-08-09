@@ -1,0 +1,19 @@
+schema_version: "0.0.3"
+sequence_version: "5.0.0"
+title: zgjg30
+description: |
+  1D sequence with inverse-gated decoupling
+  - using 30 degree flip angle
+authors:
+  - Bruker
+created: 2018-04-13
+last_modified: 2026-06-10
+repository: "github.com/waudbylab/pulseprograms"
+status: stable
+experiment_type: [1d]
+features: [broadband, decoupling]
+typical_nuclei: [13C]
+dimensions: [f1]
+acquisition_order: [f1]
+reference_pulse:
+  - {channel: f1, duration: p1, power: pl1}
